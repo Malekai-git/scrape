@@ -16,18 +16,18 @@ def scrape_salary():
     soup = BeautifulSoup(html, 'html.parser')
     text = soup.get_text()
     
-    # Rechecked regex pattern
-    pattern = r"(\W|^)(?P<currency>\$)?\s*(?P<min>\d{1,3}(?:[,\s]\d{3})*)\s*(?:-\s*(?P<max>\d{1,3}(?:[,\s]\d{3})*))?\s*(?P<period>\/\s*\w+)?"
+    # Updated regex pattern
+    pattern = r"(\W|^)(?P<currency>\$)?\s*(?P<min>\d{1,3}(?:[,\s]\d{3})*)(?:\s*-\s*(?P<max>\d{1,3}(?:[,\s]\d{3})*))?\s*(?P<period>\/\s*\w+)?"
     
     salaries = re.findall(pattern, text)
     
     # Creating a list to hold the extracted data in dictionary form
     extracted_salaries = []
     for salary_match in salaries:
-        currency = salary_match[1] if salary_match[1] else 'Unknown'
-        min_salary = salary_match[2] if salary_match[2] else 'Unknown'
-        max_salary = salary_match[3] if salary_match[3] else 'Unknown'
-        period = salary_match[4].replace('/', '').strip() if salary_match[4] else 'Unknown'
+        currency = salary_match[2] if salary_match[2] else 'Unknown'
+        min_salary = salary_match[3] if salary_match[3] else 'Unknown'
+        max_salary = salary_match[4] if salary_match[4] else 'Unknown'
+        period = salary_match[5].replace('/', '').strip() if salary_match[5] else 'Unknown'
         
         extracted_salaries.append({
             'currency': currency,
