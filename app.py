@@ -16,8 +16,8 @@ def scrape_salary():
     soup = BeautifulSoup(html, 'html.parser')
     text = soup.get_text()
     
-    # Updated regex pattern
-    pattern = r"(\W|^)(?P<currency>\$)?\s*(?P<min>\d{1,3}(?:[,\s]\d{3})*)(?:\s*-\s*(?P<max>\d{1,3}(?:[,\s]\d{3})*))?\s*(?P<period>\/\s*\w+)?"
+    # Updated regex pattern to capture "to" in salary range
+    pattern = r"(\W|^)(?P<currency>\$)?\s*(?P<min>\d{1,3}(?:[,\s]\d{3})*)(?:\s*-\s*|\sto\s)(?P<max>\d{1,3}(?:[,\s]\d{3})*))?\s*(?P<period>\/\s*\w+)?"
     
     salaries = re.findall(pattern, text)
     
