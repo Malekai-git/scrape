@@ -27,11 +27,13 @@ def scrape_salary():
         currency = salary_match[2] if salary_match[2] else 'Unknown'
         min_salary = salary_match[3] if salary_match[3] else 'Unknown'
         max_salary = salary_match[4] if salary_match[4] else 'Unknown'
+        period = salary_match[5].replace('/', '').strip() if salary_match[5] else 'Unknown'
         
         extracted_salaries.append({
             'currency': currency,
             'min_salary': min_salary,
-            'max_salary': max_salary
+            'max_salary': max_salary,
+            'period': period
         })
 
     return jsonify({"salaries": extracted_salaries})
